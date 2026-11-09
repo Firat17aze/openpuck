@@ -1,0 +1,52 @@
+OpenPuck
+Copyright 2026 David Moran and contributors
+
+OpenPuck is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+OpenPuck is an independent project, not affiliated with or endorsed by
+MetalFab Tokens. "Life Puck" is used only to describe compatible hardware.
+
+This product includes or builds on the following third-party software.
+Each component keeps its own license.
+
+Included in the firmware
+------------------------
+
+LVGL (https://lvgl.io)
+  Copyright (c) LVGL Kft. MIT License.
+  Fetched at build time through the ESP-IDF component manager
+  (see dependencies.lock). LVGL also provides the built-in Montserrat
+  fonts used for small text, which are under the SIL Open Font License 1.1.
+
+Espressif ESP-IDF (https://github.com/espressif/esp-idf)
+  Copyright Espressif Systems (Shanghai) CO LTD. Apache License 2.0.
+  Includes its bundled components (FreeRTOS, drivers, newlib and others),
+  each under its own license as stated in ESP-IDF.
+
+Espressif IDF components, fetched at build time (see dependencies.lock),
+all under the Apache License 2.0:
+  espressif/esp_lvgl_port
+  espressif/esp_lcd_gc9a01
+  espressif/esp_lcd_touch
+  espressif/esp_lcd_touch_cst816s
+  espressif/cmake_utilities
+
+Atkinson Hyperlegible Next, Bold (https://github.com/googlefonts/atkinson-hyperlegible-next)
+  Copyright 2020-2024 The Atkinson Hyperlegible Next Project Authors.
+  SIL Open Font License 1.1 (see fonts/OFL.txt). The digits in main/fonts/
+  are generated from this font.
+
+Used only for development and testing (not part of the firmware)
+-----------------------------------------------------------------
+
+Unity test framework (https://github.com/ThrowTheSwitch/Unity)
+  Copyright (c) ThrowTheSwitch.org. MIT License.
+  Fetched when the host unit tests are built.
+
+stb_image_write (https://github.com/nothings/stb)
+  Sean Barrett and contributors. Public domain (or MIT, at your option).
+  Fetched when the screenshot tool is built.
+
+lv_font_conv (https://github.com/lvgl/lv_font_conv)
+  MIT License. Run through npx by tools/gen_fonts.sh to regenerate the
+  bitmap fonts; not bundled.

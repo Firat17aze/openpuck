@@ -1,0 +1,26 @@
+# OpenPuck defaults for the MetalFab Tokens Life Puck (ESP32-C3, 4 MB flash)
+CONFIG_IDF_TARGET="esp32c3"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+
+CONFIG_FREERTOS_HZ=1000
+
+# Release profile: quiet logs (warnings and errors only). sdkconfig.dev adds INFO.
+CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+CONFIG_BOOTLOADER_LOG_LEVEL_WARN=y
+
+# Logs over the built-in USB port
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+
+# LVGL fonts used by the UI
+CONFIG_LV_FONT_MONTSERRAT_14=y
+CONFIG_LV_FONT_MONTSERRAT_20=y
+CONFIG_LV_FONT_MONTSERRAT_28=y
+CONFIG_LV_FONT_MONTSERRAT_48=y
+
+# Power: automatic light sleep between events (esp_pm_configure in power.c).
+CONFIG_PM_ENABLE=y
+CONFIG_FREERTOS_USE_TICKLESS_IDLE=y
+# Off by default in IDF: with it, the USB-Serial-JTAG connection (flashing,
+# logs) holds off light sleep while a host is attached; on battery it sleeps.
+CONFIG_USJ_NO_AUTO_LS_ON_CONNECTION=y

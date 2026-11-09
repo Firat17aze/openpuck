@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the user guide
+    url: https://github.com/wavemoran/openpuck/blob/main/docs/user-guide.md
+    about: How every screen and setting works.
+  - name: Get help
+    url: https://github.com/wavemoran/openpuck/blob/main/SUPPORT.md
+    about: Where to find answers before opening an issue.

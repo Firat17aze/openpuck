@@ -1,0 +1,54 @@
+name: Bug report
+description: Something does not work the way the user guide says it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping. Please check the [user guide](https://github.com/wavemoran/openpuck/blob/main/docs/user-guide.md) first.
+        To report a security problem, use "Report a vulnerability" on the Security tab instead.
+  - type: input
+    id: version
+    attributes:
+      label: OpenPuck version
+      description: >-
+        The version shown at the bottom of Settings (for example v0.2.0). It is also
+        printed in the startup log. If you cannot open Settings, say how you installed it.
+    validations:
+      required: true
+  - type: dropdown
+    id: players
+    attributes:
+      label: Players
+      options:
+        - 1 player
+        - 2 players
+        - Not related to the counter
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to repeat it
+      placeholder: |
+        1. Hold the center to open the menu
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: photos
+    attributes:
+      label: Photos or screenshots (optional)
+      description: Drag and drop images here.

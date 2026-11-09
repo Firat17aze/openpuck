@@ -1,0 +1,8 @@
+# Development profile: INFO logs. Layer on top of sdkconfig.defaults:
+#   idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.dev" -B build-dev build
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_BOOTLOADER_LOG_LEVEL_INFO=y
+
+# Power measurement: on-screen light-sleep percentage (see OPENPUCK_POWER_STATS)
+CONFIG_PM_PROFILING=y
+CONFIG_OPENPUCK_POWER_STATS=y

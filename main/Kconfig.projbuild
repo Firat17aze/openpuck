@@ -1,0 +1,19 @@
+menu "OpenPuck"
+
+    config OPENPUCK_POWER_OFF_HOLD_MS
+        int "Hold the power button this long to power off (ms)"
+        range 500 10000
+        default 2000
+
+    config OPENPUCK_POWER_STATS
+        bool "Show light-sleep statistics on screen (development only)"
+        depends on PM_PROFILING
+        default n
+        help
+            Shows a small label at the bottom of the screen with the share of
+            time since boot that the chip has spent in light sleep, and the CPU
+            frequency of the mode it spent the most awake time in. Updated every
+            5 seconds. The label's own updates wake the chip, so leave this off
+            in release builds.
+
+endmenu

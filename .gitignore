@@ -1,0 +1,18 @@
+# ESP-IDF build output and generated config (sdkconfig.defaults is the source of truth)
+build/
+build-host/
+build-dev/
+build-screenshots/
+sdkconfig
+sdkconfig.old
+managed_components/
+
+.DS_Store
+.vscode/
+__pycache__/
+
+# Private planning notes
+docs/goals.md
+
+# Local agent worktrees
+.claude/

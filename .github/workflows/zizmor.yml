@@ -1,0 +1,35 @@
+name: zizmor
+
+# Audits our GitHub Actions workflows and Dependabot config for security
+# problems (https://docs.zizmor.sh). Runs on every PR (no path filter, so it
+# can be a required check without ever staying pending) and on main.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A newer push to the same branch or PR supersedes runs still in progress.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  zizmor:
+    name: Workflow security audit
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read  # check out the workflows to audit
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+        with:
+          # Code scanning upload needs GitHub Advanced Security on private
+          # repos; fail the job on findings and annotate the PR instead.
+          advanced-security: false
+          annotations: true
+          # Match the version used locally so results agree.
+          version: 1.32.0
