@@ -1,0 +1,121 @@
+/* OpenPuck installer styles: system fonts only, light and dark, works down to 320 px.
+   Palette from docs/brand: Ink #0E1013, Bone #F5F2EA, Ember #FF5A36 (the one accent). */
+:root {
+  --bg: #FBFAF6; --fg: #16181C; --muted: #54575D; --line: #DDD8CC; --card: #FFFFFF; --sunk: #F1EEE5;
+  --accent: #FF5A36; --accent-fg: #0E1013; --link: #B3300F; --focus: #B3300F;
+  --caution-bg: #FFF3D1; --caution-line: #A66B00; --bad: #B42318; --ok: #1A7F37;
+  --puck-line: #16181C; --puck-fill: #F1EEE5;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0E1013; --fg: #F5F2EA; --muted: #A9ADB3; --line: #2A2F36; --card: #171A1F; --sunk: #0E1013;
+    --link: #FF8A6B; --focus: #FF5A36;
+    --caution-bg: #2A2110; --caution-line: #E0A526; --bad: #FF7B72; --ok: #56D364;
+    --puck-line: #F5F2EA; --puck-fill: #0E1013;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-size: 1.0625rem; line-height: 1.55; }
+.top, main, footer { max-width: 36rem; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+.top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px; padding-top: 24px; padding-bottom: 8px; }
+.logo { display: block; line-height: 0; }
+.logo img { height: 34px; width: auto; max-width: 100%; }
+.tools { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+h1 { font-size: 1.5rem; line-height: 1.2; margin: 24px 0 16px; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 16px; }
+h2:focus, h2:focus-visible { outline: none; }
+h3 { font-size: 1.0625rem; margin: 24px 0 8px; }
+p { margin: 0 0 16px; }
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, pre:focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.note { color: var(--muted); font-size: 0.95rem; }
+.alert { font-weight: 700; color: var(--bad); font-size: 1.125rem; }
+.ok { color: var(--ok); font-weight: 600; }
+
+/* Quiet header and secondary controls */
+.quiet { font: inherit; font-size: 0.9rem; color: var(--muted); background: none; border: 0; padding: 8px 0; min-height: 40px;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.quiet:hover { color: var(--fg); text-decoration: underline; }
+.gh { flex: none; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin: 0 0 24px; }
+.card > :last-child { margin-bottom: 0; }
+
+/* Step indicator */
+.steps { list-style: none; display: flex; margin: 0 0 16px; padding: 0; gap: 8px; counter-reset: s; }
+.steps li { flex: 1; counter-increment: s; font-size: 0.85rem; color: var(--muted); border-top: 3px solid var(--line);
+  padding-top: 8px; min-width: 0; overflow-wrap: anywhere; }
+.steps li::before { content: counter(s) ". "; }
+.steps li.done { border-top-color: var(--fg); }
+.steps li[aria-current="step"] { color: var(--fg); font-weight: 700; border-top-color: var(--accent); }
+
+/* Buttons: Ember with Ink text (6.1:1) for the one primary action */
+.btn { font: inherit; font-weight: 600; min-height: 44px; padding: 8px 20px; border-radius: 10px; display: inline-flex;
+  align-items: center; justify-content: center; text-align: center; text-decoration: none; cursor: pointer;
+  border: 2px solid var(--accent); background: var(--accent); color: var(--accent-fg); }
+.btn.secondary { background: transparent; border-color: var(--line); color: var(--fg); }
+.btn.secondary:hover { border-color: var(--muted); }
+.btn.big { font-size: 1.125rem; min-height: 52px; padding: 10px 32px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { margin: 24px 0 0; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.actions .btn.primary { flex: 1 1 12rem; }
+.linkrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.linkrow .btn { min-height: 40px; padding: 4px 16px; font-size: 0.95rem; }
+.check { display: flex; gap: 12px; align-items: flex-start; font-weight: 600; cursor: pointer; }
+.check input { width: 1.4rem; height: 1.4rem; flex: none; margin: 1px 0 0; accent-color: var(--accent); }
+.ack { margin: 24px 0 0; }
+input[type="file"] { max-width: 100%; font: inherit; }
+.plain { padding-left: 1.25rem; margin: 0 0 16px; }
+.what { margin-bottom: 8px; }
+
+/* Caution panel: amber, never Ember */
+.caution { background: var(--caution-bg); border: 1px solid var(--caution-line); border-left-width: 6px; border-radius: 12px; padding: 16px; margin: 24px 0; }
+.caution h3 { margin: 0 0 8px; font-size: 1.125rem; }
+.caution ul { margin: 0; padding-left: 1.25rem; }
+.caution li + li { margin-top: 8px; }
+
+.facts { background: var(--sunk); border-radius: 10px; padding: 16px; margin: 16px 0; }
+.facts dt { font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.facts dd { margin: 0 0 8px; overflow-wrap: anywhere; }
+.facts dd:last-child { margin-bottom: 0; }
+.hash { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85rem; }
+
+.progress { margin: 24px 0 0; }
+.track { height: 16px; background: var(--sunk); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--accent); transition: width 0.2s; }
+.progress-row { display: flex; justify-content: space-between; gap: 16px; margin: 8px 0 0; font-size: 0.95rem; }
+.pct { font-weight: 700; }
+
+.visual { max-width: 200px; margin: 0 auto 24px; }
+.visual svg { width: 100%; height: auto; display: block; overflow: visible; }
+.body { fill: var(--puck-fill); stroke: var(--puck-line); stroke-width: 5; }
+.face { fill: none; stroke: var(--line); stroke-width: 4; }
+.ring { fill: none; stroke: var(--accent); stroke-width: 4; transform-box: fill-box; transform-origin: center; }
+.btn-pressed, .btn-up { fill: var(--accent); }
+.arrow { fill: none; stroke: var(--puck-line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .pulse { animation: pulse 1.2s ease-out infinite; }
+  .step-release .arrow { animation: nudge 0.8s ease-in-out infinite alternate; }
+}
+@keyframes pulse { 0% { transform: scale(0.7); opacity: 1; } 100% { transform: scale(1.7); opacity: 0.05; } }
+@keyframes nudge { to { transform: translateY(-4px); } }
+
+.log { margin: 0 0 24px; padding-top: 8px; }
+.log summary { cursor: pointer; font-size: 0.9rem; color: var(--muted); }
+.log pre { background: var(--card); border: 1px solid var(--line); padding: 12px; border-radius: 10px; max-height: 14rem; overflow: auto;
+  font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+footer { border-top: 1px solid var(--line); padding-top: 16px; padding-bottom: 40px; font-size: 0.9rem; color: var(--muted); }
+footer p { margin: 0 0 8px; }
+footer .disclaimer { margin-bottom: 16px; }
+
+.sound-box { margin: 16px 0 0; padding: 16px; background: var(--sunk); border: 1px solid var(--line); border-radius: 12px; }
+.sound-box .sound-note { margin: 0 0 8px; }
+.btn.small { min-height: 40px; padding: 4px 16px; font-size: 0.95rem; }
+.btn .icon, .quiet .icon { display: inline-flex; margin-right: 8px; }
+.sound-row { text-align: center; margin: -8px 0 16px; }
+.sound-toggle { border: 1px solid var(--line); border-radius: 999px; padding: 4px 16px; color: var(--fg); }
+.ack + .note { margin-top: 16px; }
