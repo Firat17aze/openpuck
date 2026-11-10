@@ -29,7 +29,7 @@ See [roadmap.md](roadmap.md).
 installer/
   index.html, restore.html   one step per screen
   css/style.css
-  js/constants.js       USB ids, registers, sizes, expected flash ID
+  js/constants.js       USB ids, registers and fixed image sizes
   js/md5.js, hash.js    MD5 (for the stub's digests) and SHA-256 (crypto.subtle)
   js/transport.js       RobustTransport (extends esptool-js Transport)
   js/flashio.js         readFlashVerified, writeImagesVerified
