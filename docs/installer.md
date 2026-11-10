@@ -62,7 +62,7 @@ UI) is injected, so the tests drive it with mocks. The UI interface is
 2. The user clicks Connect; the UI calls `requestPort` with the `303a:1001`
    filter.
 3. `connectPuck(port)` (below).
-4. `prepareFlash`: load the stub, attach, check the flash ID is `0x164020`,
+4. `prepareFlash`: load the stub, attach, check the flash capacity is 4 MiB,
    read the MAC.
 5. Read the full 4 MB (progress), then `checkBackup` (size, `0xE9` at 0,
    `0xAA 0x50` at 0x8000). Stop without writing if it fails.
