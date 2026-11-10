@@ -148,10 +148,6 @@ def prepare(esp, require_4mb):
         print(f"Flash ID {flash_id:#08x}")
     else:
         print(f"Flash ID {flash_id:#08x}, {size // 1024} KB")
-    manufacturer = flash_id & 0xFF
-    flash_type = (flash_id >> 8) & 0xFF
-    if size is None or flash_type == 0xFF or manufacturer in (0x00, 0xFF):
-        sys.exit(f"Unexpected flash chip (ID {flash_id:#08x}).")
     if require_4mb and not is_compatible_4mb_flash(flash_id):
         sys.exit(f"Unexpected flash chip (ID {flash_id:#08x}); refusing to write.")
     return esp, size
@@ -212,6 +208,9 @@ def cmd_backup(args):
     if os.path.exists(args.output):
         sys.exit(f"{args.output} already exists; choose another name.")
     esp, size = prepare(connect(), require_4mb=False)
+    if size is None:
+        finish(esp)
+        sys.exit("Could not determine the flash size; backup was not created.")
     print(f"Reading {size // 1024} KB; this takes about a minute.")
     read_flash(esp, 0, size, output=args.output)
     digest = hashlib.sha256(open(args.output, "rb").read()).hexdigest()
